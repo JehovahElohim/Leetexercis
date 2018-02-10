@@ -1,6 +1,8 @@
 package _1_TwoSum;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Given an array of integers, return indices of the two numbers such that they
@@ -20,7 +22,7 @@ public class Solution {
 	private static class Node implements Comparable<Node> {
 		private int val;
 		private int index;
-
+		
 		public Node(int val, int index) {
 			super();
 			this.val = val;
@@ -37,40 +39,23 @@ public class Solution {
 	}
 
 	public static int[] twoSum(int[] nums, int target) {
-		int result[] = new int[2];
-
-		Node temp[] = new Node[nums.length];
-
+		Map<Integer, Integer> map = new HashMap<>();
 		for (int i = 0; i < nums.length; i++) {
-			temp[i] = new Node(nums[i], i);
+			map.put(nums[i], i);
 		}
-		// ÅÅÐò
-		Arrays.sort(temp);
-		for (Node node : temp) {
-			System.out.println(node.val);
-		}
-		int j = temp.length - 1;
-		int i = 0;
-
-		while (j > i) {
-			if (temp[i].val + temp[j].val == target) {
-				result[0] = temp[i].index;
-				result[1] = temp[j].index;
-				break;
-			} else if (temp[i].val + temp[j].val < target) {
-				i++;
-			} else if (temp[i].val + temp[j].val > target) {
-				j--;
+		System.out.println(map.size());
+		for (int i = 0; i < nums.length; i++) {
+			int complement = target - nums[i];
+			if (map.containsKey(complement) && map.get(complement) != i) {
+				return new int[] { i, map.get(complement) };
 			}
 		}
-
-		return result;
-
+		throw new IllegalArgumentException("No two sum solution");
 	}
 
 	public static void main(String args[]) {
-		int num[] = { 3, 2, 4 };
-		int result[] = twoSum(num, 6);
+		int num[] = { 1, 10, 5, 5 };
+		int result[] = twoSum(num, 10);
 		for (int i : result) {
 			System.out.println(i);
 		}
