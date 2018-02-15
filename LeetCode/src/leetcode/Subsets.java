@@ -28,6 +28,7 @@ public class Subsets {
 			List<Integer> temp, int[] nums) {
 		List<Integer> list = new ArrayList<Integer>(temp);
 		result.add(list);
+	
 		for (int i = index; i < nums.length; i++) {
 			temp.add(nums[i]);
 			helper(result, i+1, temp, nums);
