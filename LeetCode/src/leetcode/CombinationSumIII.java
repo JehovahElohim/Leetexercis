@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,6 @@ import java.util.List;
 public class CombinationSumIII {
 	public List<List<Integer>> combinationSum3(int k, int n) {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		for (int i = 0; i < array.length; i++) {
-			
-		}
 		return result;
 	}
 }
