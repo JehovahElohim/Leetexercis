@@ -2,7 +2,13 @@ package leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 
 /**
  * 其实是给定了一个beginWord和endWord，还有可用的单词列表，然后我们需要在每次只转换一个字符且转换后的字符在wordList中的情况下，
@@ -21,60 +27,99 @@ import java.util.List;
  *
  */
 public class WordLadderII {
-	public List<List<String>> findLadders(String beginWord, String endWord,
-			List<String> wordList) {
-		List<List<String>> result = new ArrayList<>();
-		return null;
-	}
+	public static List<List<String>> findLadders(String beginWord,
+			String endWord, List<String> wordList) {
+		List<List<String>> res = new LinkedList<List<String>>();
 
-	public void bfs(String beginWord, String endWord, List<String> wordList,
-			List<List<String>> result, List<String> temp) {
-		int len = beginWord.length();
-		List<String> accord = new ArrayList<String>();
-		for (String string : wordList) {
-			boolean diff = false;
-			for (int i = 0; i < len; i++) {
-				if (string.charAt(i) != beginWord.charAt(i)) {
-					if (diff)
-						break;
-					else {
-						diff = true;
-					}
-				}
-				if (i == len - 1 && diff) {
-					accord.add(string);
+		Map<String, List<String>> map = new HashMap<>();
+		Queue<String> queue = new LinkedList<>();
+		queue.add(beginWord);
+		while (!queue.isEmpty()) {
+			String s = queue.poll();
+			if (s.equals(endWord))
+				break;
+			if (!map.containsKey(s)) {
+				List<String> nextWords = getWordsForBFS(map, s, wordList,
+						endWord);
+				map.put(s, nextWords);
+				for (String string : nextWords) {
+					queue.add(string);
 				}
 			}
 		}
-		for (String string : accord) {
-			bfs(beginWord, endWord, wordList, result, temp);
+		List<String> temp = new LinkedList<String>();
+		temp.add(beginWord);
+		dfs(res, map, temp, endWord, beginWord);
+
+		int min = Integer.MAX_VALUE;
+		for (List<String> l : res) {
+			min = Math.min(l.size(), min);
 		}
-		
+
+		Iterator<List<String>> it = res.iterator();
+		while (it.hasNext()) {
+			if (it.next().size() > min)
+				it.remove();
+		}
+		System.out.println(res);
+		return res;
+	}
+
+	static void dfs(List<List<String>> res, Map<String, List<String>> map,
+			List<String> temp, String endWord, String s) {
+		List<String> value = map.get(s);
+		if (value == null) {
+			if (s.equals(endWord))
+				res.add(new ArrayList<String>(temp));
+			return;
+		}
+		for (int i = 0; i < value.size(); i++) {
+			temp.add(value.get(i));
+			dfs(res, map, temp, endWord, value.get(i));
+			temp.remove(temp.size() - 1);
+		}
+	}
+
+	static List<String> getWordsForBFS(Map<String, List<String>> map, String s,
+			List<String> wordList, String endWord) {
+		List<String> res = new ArrayList<>();
+		int len = wordList.size();
+		for (int i = 0; i < len; i++) {
+			String temp = wordList.get(i);
+			if (isSimilar(s, temp)) {
+				if (temp.equals(endWord)) {
+					res.clear();
+					res.add(endWord);
+					break;
+				}
+				if (!map.containsKey(temp))
+					res.add(temp);
+			}
+		}
+		System.out.println(s+":"+res);
+		return res;
+	}
+
+	static boolean isSimilar(String s1, String s2) {
+		int len = s1.length();
+		boolean diff = false;
+		for (int i = 0; i < len; i++) {
+			if(s1.charAt(i)!=s2.charAt(i)){
+				if(diff)
+					return false;
+				diff = true;
+			}
+		}
+		return diff;
 	}
 
 	public static void main(String args[]) {
-		String beginWord = "hot";
-		String endWord = "cog";
-		List<String> wordList = new ArrayList<String>(
-				Arrays.asList(new String[] { "hot", "dot", "dog", "lot", "log",
-						"cog" }));
-		int len = beginWord.length();
-		List<String> accord = new ArrayList<String>();
-		for (String string : wordList) {
-			boolean diff = false;
-			for (int i = 0; i < len; i++) {
-				if (string.charAt(i) != beginWord.charAt(i)) {
-					if (diff)
-						break;
-					else {
-						diff = true;
-					}
-				}
-				if (i == len - 1 && diff) {
-					accord.add(string);
-					System.out.print(string+" ");
-				}
-			}
-		}
+		System.out.println(isSimilar("lest", "lose"));
+		
+//		String beginWord = "leet";
+//		String endWord = "code";
+//		List<String> list = new ArrayList<String>(Arrays.asList("lest", "leet",
+//				"lose", "code", "lode", "robe", "lost"));
+//		findLadders(beginWord, endWord, list);
 	}
 }
