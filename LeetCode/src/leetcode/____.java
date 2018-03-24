@@ -36,7 +36,7 @@ public class ____ {
 	static ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<>();
 
 	public static void main(String args[]) throws IOException, InterruptedException, ExecutionException {
-		System.out.println("Length of Last Word".replaceAll(" ", ""));
+		System.out.println("Maximum Depth of Binary Tree".replaceAll(" ", ""));
 		System.out.println(Double.valueOf("3"));
 	}
 

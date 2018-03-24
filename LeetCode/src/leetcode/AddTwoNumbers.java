@@ -11,8 +11,6 @@ package leetcode;
  * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4) Output: 7 -> 0 -> 8 Explanation: 342 +
  * 465 = 807.
  */
-// �����������?��������Ǹ���ÿһ���ڵ���һ����λ�������Ƿ���洢�ģ�����һ������ʾ���λ�����һ������ʾ���λ��
-// �����������Ӻͣ�������������ʽ���ء�
 
 public class AddTwoNumbers {
 	static class ListNode {
@@ -21,6 +19,32 @@ public class AddTwoNumbers {
 
 		public ListNode(int x) {
 			val = x;
+		}
+
+		public ListNode(int[] arr) {
+			ListNode cur = this;
+			cur.val = arr[0];
+			for (int i = 1; i < arr.length; i++) {
+				cur.next = new ListNode(arr[i]);
+				cur = cur.next;
+			}
+			
+		}
+
+		public ListNode() {
+		}
+
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			sb.append('[');
+			ListNode cur = this;
+			while (cur != null) {
+				sb.append(cur.val).append(',');
+				cur = cur.next;
+			}
+			sb.deleteCharAt(sb.length() - 1);
+			sb.append(']');
+			return sb.toString();
 		}
 	}
 
