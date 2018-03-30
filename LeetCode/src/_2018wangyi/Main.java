@@ -2,39 +2,38 @@ package _2018wangyi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String args[]) {
 		Scanner s = new Scanner(System.in);
-		String bds = s.nextLine();
-		String[] nums = bds.split("\\+");
-		Arrays.sort(nums);
-		StringBuilder sb = new StringBuilder();
-		int count = 1;
-		for (int i = 0; i < nums.length - 1; i++) {
-			if (nums[i].equals(nums[i + 1])) {
-				count++;
-			} else {
-				sb.append(nums[i]).append("*").append(count).append("+");
-				count = 1;
+		 int len = readInt(s);
+		 int[] num = new int[len];
+		 for (int i = 0; i < num.length; i++) {
+		 num[i] = readInt(s);
+		 }
+//		int[] num = new int[] { 1, 2, 4, 0, 0, 0,142, 214, 12,  0 };
+		int r = num.length - 1;
+		for (int i = 0; i <= r; i++) {
+			if (num[i] == 0) {
+				for (int j = i + 1; j < num.length; j++) {
+					num[j - 1] = num[j];
+				}
+				num[r] = 0;
+				r--;
+				i--;
 			}
 		}
-		sb.append(nums[nums.length - 1]).append("*").append(count);
-		int sum = 0;
-
-		String[] res = sb.toString().split("\\+");
-		for (int i = 0; i < res.length; i++) {
-			String[] temp = res[i].split("\\*");
-			sum += Integer.parseInt(temp[0]) * Integer.parseInt(temp[1]);
+		for (int i = 0; i < num.length; i++) {
+			System.out.println(num[i]);
 		}
+	}
 
-		System.out.println(sb.toString());
-		System.out.println(sum);
+	public static void swap(int num[], int i, int j) {
+		num[i] = num[i] ^ num[j];
+		num[j] = num[i] ^ num[j];
+		num[i] = num[i] ^ num[j];
 	}
 
 	public static List<Integer> readInts(Scanner s) {

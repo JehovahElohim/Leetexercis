@@ -36,7 +36,7 @@ public class ____ {
 	static ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<>();
 
 	public static void main(String args[]) throws IOException, InterruptedException, ExecutionException {
-		System.out.println("Maximum Depth of Binary Tree".replaceAll(" ", ""));
+		System.out.println(" Remove Duplicates from Sorted List II".replaceAll(" ", ""));
 		System.out.println(Double.valueOf("3"));
 	}
 

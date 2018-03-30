@@ -1,5 +1,6 @@
 package leetcode;
 
+
 public class MaximumDepthofBinaryTree {
 	public int maxDepth(TreeNode root) {
 		if (root == null)
@@ -7,3 +8,4 @@ public class MaximumDepthofBinaryTree {
 		return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 	}
 }
+    
