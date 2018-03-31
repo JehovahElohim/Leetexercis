@@ -42,7 +42,7 @@ public class ConstructBinaryTreefromPreorderandInorderTraversal {
 
 	public static void main(String args[]) {
 		new ConstructBinaryTreefromPreorderandInorderTraversal().buildTree(
-				new int[] { 2, 4 }, new int[] { 2, 4 });
+				new int[] { 2,3,1 }, new int[] { 1,2,3 });
 	}
 }
 

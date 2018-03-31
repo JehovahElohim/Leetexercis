@@ -10,24 +10,22 @@ public class RemoveDuplicatesfromSortedListII {
 		ListNode cur = head;
 		while (cur != null && cur.next != null) {
 			ListNode next = cur.next;
-			while (cur.val == next.val) {
-				
+			if (cur.val == next.val) {
+				while (next != null && cur.val == next.val) {
+					next = next.next;
+				}
+				prev.next = next;
+			} else {
+				prev = prev.next;
 			}
+			cur = prev.next;
 		}
 
 		return header.next;
-		// if (head == null || head.next == null)
-		// return head;
-		// head.next = deleteDuplicates(head.next);
-		// if (head.val == head.next.val) {
-		// head.next = head.next.next;
-		// }
-		// return head;
 	}
 
 	public static void main(String args[]) {
-		System.out.println(deleteDuplicates(new ListNode(new int[] { 1, 1, 2,
-				2, 3, 3, 4, 4 })));
+		System.out.println(deleteDuplicates(new ListNode(new int[] { })));
 	}
 
 }
