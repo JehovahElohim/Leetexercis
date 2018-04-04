@@ -26,6 +26,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
@@ -36,7 +37,7 @@ public class ____ {
 	static ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<>();
 
 	public static void main(String args[]) throws IOException, InterruptedException, ExecutionException {
-		System.out.println("Path Sum II".replaceAll(" ", ""));
+		System.out.println("Range Sum Query - Immutable".replaceAll(" ", ""));
 	}
 
 	public static class Test extends ReentrantLock implements Runnable {
