@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,8 +37,18 @@ import javax.sql.rowset.CachedRowSet;
 public class ____ {
 	static ConcurrentHashMap<Integer, Integer> map = new ConcurrentHashMap<>();
 
-	public static void main(String args[]) throws IOException, InterruptedException, ExecutionException {
-		System.out.println("Range Sum Query - Immutable".replaceAll(" ", ""));
+	public static void main(String args[]) throws IOException,
+			InterruptedException, ExecutionException {
+		System.out.println("Range Sum Query 2D - Immutable".replaceAll(" ", "")
+				.replaceAll("-", "_"));
+		System.out.println("46,89],[50,53],[52,68],[72,45],[77,81".replaceAll(
+				"\\[", "{").replaceAll("\\]", "}"));
+		Map<long[], Integer> m = new HashMap<long[], Integer>();
+
+		m.put(new long[] { 1 }, 1);
+		m.put(new long[] { 1 }, 2);
+		System.out.println(m.get(new long[] { 1 }));
+
 	}
 
 	public static class Test extends ReentrantLock implements Runnable {
@@ -70,30 +81,31 @@ public class ____ {
 	}
 }
 
-class Task implements Callable<Integer>{
-    @Override
-    public Integer call() throws Exception {
-        System.out.println("C线程在进行计算");
-        Thread.sleep(3000);
-        int sum = 0;
-        for(int i=0;i<100;i++)
-            sum += i;
-        return sum;
-    }
+class Task implements Callable<Integer> {
+	@Override
+	public Integer call() throws Exception {
+		System.out.println("C线程在进行计算");
+		Thread.sleep(3000);
+		int sum = 0;
+		for (int i = 0; i < 100; i++)
+			sum += i;
+		return sum;
+	}
 }
-class Task1 implements Runnable{
+
+class Task1 implements Runnable {
 
 	@Override
 	public void run() {
 		System.out.println("R线程在进行计算");
-        try {
+		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        int sum = 0;
-        for(int i=0;i<100;i++)
-            sum += i;
+		int sum = 0;
+		for (int i = 0; i < 100; i++)
+			sum += i;
 	}
 }
