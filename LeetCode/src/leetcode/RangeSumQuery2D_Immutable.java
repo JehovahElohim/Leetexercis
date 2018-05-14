@@ -1,6 +1,5 @@
 package leetcode;
 
-import _2018wangyi.Matrix;
 
 public class RangeSumQuery2D_Immutable {
 
